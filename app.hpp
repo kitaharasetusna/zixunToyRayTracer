@@ -1,8 +1,9 @@
 #ifndef C_APP_H
 #define C_APP_H
 
-#include "./myRayTracer/image.hpp"
 #include<SDL2/SDL.h>
+#include "./myRayTracer/image.hpp"
+#include "./myRayTracer/scene.hpp"
 
 //A class dealing with windows and input from user
 class CAPP
@@ -22,6 +23,7 @@ class CAPP
         SDL_Renderer *pRender; 
 
         Image m_image;
+        myRT::Scene m_scene;
 
 };
 

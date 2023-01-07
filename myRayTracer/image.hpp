@@ -26,6 +26,10 @@ class Image
         //for app to use
         void Display();
 
+        int GetXSize();
+
+        int GetYSize();
+
     private:
         SDL_Renderer *m_pRenderer;
         SDL_Texture *m_pTexture;

@@ -71,7 +71,10 @@ void CAPP::OnRendering()
 {
     SDL_SetRenderDrawColor(pRender, 255, 255, 255, 255);
     SDL_RenderClear(pRender);
+
+    m_scene.Render(m_image);
     m_image.Display();
+
     SDL_RenderPresent(pRender);
 }
 
