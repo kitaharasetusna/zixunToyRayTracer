@@ -1,4 +1,5 @@
 #include "app.hpp"
+#include "./myRayTracer/qbLinAlg/qbVector.h"
 
 CAPP::CAPP()
 {
@@ -44,6 +45,33 @@ bool CAPP::OnInit()
         //this is where we change color of all pixels  
         // Initialise the Image instance.
 		m_image.Initialize(1920, 1200, pRender);
+
+
+        // Test the camera class.
+		myRT::Camera testCamera;
+		testCamera.SetCameraPosition(qbVector<double>(std::vector<double>{0.0, 0.0, 0.0}));
+		testCamera.SetLookAtPosition(qbVector<double>(std::vector<double>{0.0, 2.0, 0.0}));
+		testCamera.SetUp(qbVector<double>(std::vector<double>{0.0, 0.0, 1.0}));
+		testCamera.SetLength(1.0);
+		testCamera.SetHorzSize(1.0);
+		testCamera.SetAspect(1.0);
+		testCamera.UpdateCameraGeometry();
+		
+		// Get the screen centre and U,V vectors and display.
+		auto screenCentre = testCamera.GetScreenCentre();
+		auto screenU = testCamera.GetU();
+		auto screenV = testCamera.GetV();
+		
+		// And display to the terminal.
+		std::cout << "Camera screen centre:" << std::endl;
+		PrintVector(screenCentre);
+		std::cout << "\nCamera U vector:" << std::endl;
+		PrintVector(screenU);
+		std::cout << "\nCamera V vector:" << std::endl;
+		PrintVector(screenV);
+
+
+
 		
 		// Create some colour variations.
 		for (int x=0; x<1920; ++x)
@@ -85,4 +113,13 @@ void CAPP::OnExit()
     pRender = NULL;
     pWindow = NULL;
     SDL_Quit();
+}
+
+void CAPP::PrintVector(const qbVector<double> &inputVector)
+{
+	int nRows = inputVector.GetNumDims();
+	for (int row = 0; row<nRows; ++row)
+    {
+        std::cout << std::fixed << std::setprecision(3) << inputVector.GetElement(row) << std::endl;
+	} 	
 }

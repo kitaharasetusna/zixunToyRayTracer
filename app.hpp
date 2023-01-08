@@ -4,6 +4,7 @@
 #include<SDL2/SDL.h>
 #include "./myRayTracer/image.hpp"
 #include "./myRayTracer/scene.hpp"
+#include "./myRayTracer/camera.hpp"
 
 //A class dealing with windows and input from user
 class CAPP
@@ -15,6 +16,10 @@ class CAPP
         void OnEvent(SDL_Event *event);
         void OnRendering();
         void OnExit();
+    
+    private:
+    //some tool functions
+		void PrintVector(const qbVector<double> &inputVector);
 
     private:
         //some SDL2 stuff
