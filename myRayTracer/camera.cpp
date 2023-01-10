@@ -116,12 +116,18 @@ void myRT::Camera::UpdateCameraGeometry()
 	m_projectionScreenV = m_projectionScreenV * (m_cameraHorzSize / m_cameraAspectRatio);
 }
 
-myRT::Ray myRT::Camera::GenerateRay(float proScreenX, float proScreenY)
+bool myRT::Camera::GenerateRay(float proScreenX, float proScreenY, myRT::Ray &cameraRay)
 {
 	// Compute the location of the screen point in world coordinates.
 	qbVector<double> screenWorldPart1 = m_projectionScreenCentre + (m_projectionScreenU * proScreenX);
 	qbVector<double> screenWorldCoordinate = screenWorldPart1 + (m_projectionScreenV * proScreenY);
 	
+
+	//in order to write this , we have to make changes to ray.cpp and ray.hpp:
+	// we need Ray();
 	// Use this point along with the camera position to compute the ray.
-	return Ray(m_cameraPosition, screenWorldCoordinate);
+	cameraRay.m_PointStart = m_cameraPosition;//member of camera(origin of the Coordinate)
+	cameraRay.m_PointEnd = screenWorldCoordinate;
+	cameraRay.m_Ray = screenWorldCoordinate-m_cameraPosition;
+	return true;
 }

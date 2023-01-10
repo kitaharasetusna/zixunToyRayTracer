@@ -5,7 +5,7 @@ linkTarget = toolRayTracer
 LIBS = -lSDL2
 
 #define -options(flags)
-CFLAGS = -std=c++17
+CFLAGS = -std=c++17 -Ofast
 
 
 #define the object files 

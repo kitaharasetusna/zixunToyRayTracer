@@ -35,7 +35,8 @@ namespace myRT
 
             //update everything mentioned above
             void UpdateCameraGeometry();
-            Ray GenerateRay(float proScreenX, float proScreenY);
+            //Ray GenerateRay(float proScreenX, float proScreenY);
+            bool GenerateRay(float proScreenX, float proScreenY, myRT::Ray &cameraRay);
 	
 		    
 	

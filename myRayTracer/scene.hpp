@@ -2,6 +2,8 @@
 #define SCENE_H
 
 #include "image.hpp"
+#include "objectshpere.hpp"
+#include "camera.hpp"
 
 namespace myRT
 {
@@ -14,6 +16,10 @@ namespace myRT
 
         private:
         //some functions to write
+            myRT::Camera m_camera;
+
+            //a test primitive
+            myRT::ObjectShpere m_testSphere;
     };
 }
 

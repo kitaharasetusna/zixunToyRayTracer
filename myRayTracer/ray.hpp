@@ -6,6 +6,7 @@ namespace myRT
     class Ray
     {
         public:
+        Ray();
         //some functions  TODO: why &?
         Ray(qbVector<double> &startPoint, qbVector<double> &endPoint);
 

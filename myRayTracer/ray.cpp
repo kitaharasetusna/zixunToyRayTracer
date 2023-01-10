@@ -1,5 +1,12 @@
 #include "ray.hpp"
 
+myRT::Ray::Ray()
+{
+    m_PointStart = qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}};
+    m_PointEnd = qbVector<double>{std::vector<double>{0.0, 0.0, 1.0}};
+    m_Ray = m_PointEnd-m_PointStart;
+}
+
 myRT::Ray::Ray(qbVector<double> &startPoint, qbVector<double> &endPoint)
 {
     m_PointStart = startPoint;
