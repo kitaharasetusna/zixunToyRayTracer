@@ -11,6 +11,10 @@ myRT::Scene::Scene()
 
     //initialize the objectList
     m_objectList.push_back(std::make_shared<myRT::ObjectShpere>(myRT::ObjectShpere()));
+
+    m_lightList.push_back(std::make_shared<myRT::LightPoint>(myRT::LightPoint()));
+    m_lightList.at(0)->m_location = qbVector<double> {std::vector<double>{5.0, -10.0, -5.0}};
+    m_lightList.at(0)->m_color = qbVector<double> {std::vector<double>{255.0, 255.0, 255.0}};
 }
 
 
@@ -44,7 +48,17 @@ bool myRT::Scene::Render(Image &image)
                     m_camera.GenerateRay(normX, normY, cameraRay);
                     if (validInt)
                     {
-                        //get dist from camre to the sphere
+                        bool validIllum = false;
+                        //1. check if the light is visible
+                        //intensity and color of the light
+                        double intensity;
+                        qbVector<double> colorLight {3};
+                        for(auto currentLight: m_lightList)
+                        {
+                            validIllum = currentLight->computeIllumination(intPoint, localNormal, m_objectList, currentObject, colorLight, intensity);
+                        }
+
+                        //2. get dist from camre to the sphere
                         double dist = (intPoint - cameraRay.m_PointStart).norm();
                         //update distance(max min, kinda of dp)
                         if (dist > maxDist)
@@ -54,7 +68,10 @@ bool myRT::Scene::Render(Image &image)
                         minDist = dist;
                         //set the color of shpere
                         //image.SetPixel(i, j, 255.0, 0.0, 0.0);
-                        image.SetPixel(i, j, 255.0 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0);
+                        //image.SetPixel(i, j, 255.0 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0);
+
+                        //3. set color of the image
+                        image.SetPixel(i, j, 255.0*intensity, 0.0, 0.0);
                     }
                     else
                     {

@@ -56,7 +56,10 @@ bool myRT::ObjectShpere::TestIntersections(const Ray &castRay, qbVector<double> 
 			{
 				intPoint = castRay.m_PointStart + (vhat * t2);
 			}
+            localNormal = intPoint;
+			localNormal.Normalize();
         }
+        
         return true;
     }
     else

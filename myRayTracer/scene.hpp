@@ -7,7 +7,7 @@
 #include "image.hpp"
 #include "objectshpere.hpp"
 #include "camera.hpp"
-
+#include "lightPoint.hpp"
 
 namespace myRT
 {
@@ -23,9 +23,14 @@ namespace myRT
             myRT::Camera m_camera;
 
             //a test primitive
-            myRT::ObjectShpere m_testSphere;
+            //myRT::ObjectShpere m_testSphere;
 
+            //list of objects
             std::vector<std::shared_ptr<myRT::ObjectBase>> m_objectList;
+
+
+            //list of lights
+            std::vector<std::shared_ptr<myRT::LightBase>> m_lightList;
     };
 }
 
