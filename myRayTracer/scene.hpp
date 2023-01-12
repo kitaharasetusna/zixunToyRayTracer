@@ -1,9 +1,13 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include<memory>
+#include<vector>
+
 #include "image.hpp"
 #include "objectshpere.hpp"
 #include "camera.hpp"
+
 
 namespace myRT
 {
@@ -20,6 +24,8 @@ namespace myRT
 
             //a test primitive
             myRT::ObjectShpere m_testSphere;
+
+            std::vector<std::shared_ptr<myRT::ObjectBase>> m_objectList;
     };
 }
 

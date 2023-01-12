@@ -8,6 +8,9 @@ myRT::Scene::Scene()
 	m_camera.SetHorzSize(0.25);
 	m_camera.SetAspect(16.0 / 9.0);
 	m_camera.UpdateCameraGeometry();
+
+    //initialize the objectList
+    m_objectList.push_back(std::make_shared<myRT::ObjectShpere>(myRT::ObjectShpere()));
 }
 
 
@@ -33,27 +36,31 @@ bool myRT::Scene::Render(Image &image)
                 double normY = (static_cast<double>(j) * yFact) - 1.0;
                 m_camera.GenerateRay(normX, normY, cameraRay);
 
-                bool validInt = m_testSphere.TestIntersections(cameraRay, intPoint, localNormal, localColor);
-                // Generate the ray for this pixel.
-			    m_camera.GenerateRay(normX, normY, cameraRay);
-                if (validInt)
+                //enumerate all objects to test intersection
+                for(auto currentObject :m_objectList)
                 {
-                    //get dist from camre to the sphere
-                    double dist = (intPoint - cameraRay.m_PointStart).norm();
-                    //update distance(max min, kinda of dp)
-                    if (dist > maxDist)
-					maxDist = dist;
-				
-				    if (dist < minDist)
-					minDist = dist;
-                    //set the color of shpere
-                    //image.SetPixel(i, j, 255.0, 0.0, 0.0);
-                    image.SetPixel(i, j, 255.0 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0);
-                }
-                else
-                {
-                    //set black
-                    image.SetPixel(i, j, 0.0, 0.0, 0.0);
+                    bool validInt = currentObject->TestIntersections(cameraRay, intPoint, localNormal, localColor);
+                    // Generate the ray for this pixel.
+                    m_camera.GenerateRay(normX, normY, cameraRay);
+                    if (validInt)
+                    {
+                        //get dist from camre to the sphere
+                        double dist = (intPoint - cameraRay.m_PointStart).norm();
+                        //update distance(max min, kinda of dp)
+                        if (dist > maxDist)
+                        maxDist = dist;
+                    
+                        if (dist < minDist)
+                        minDist = dist;
+                        //set the color of shpere
+                        //image.SetPixel(i, j, 255.0, 0.0, 0.0);
+                        image.SetPixel(i, j, 255.0 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0);
+                    }
+                    else
+                    {
+                        //set black
+                        image.SetPixel(i, j, 0.0, 0.0, 0.0);
+                    }
                 }
             }
     return true;
