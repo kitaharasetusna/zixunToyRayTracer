@@ -26,7 +26,7 @@ bool myRT::LightPoint::computeIllumination (const qbVector<double> &intPoint, co
     //double angle = acos(qbVector<double>::dot(localNormal, lightDir));
 
 
-    intensity = m_intensity*(std::max(0.0, nl));
+    
     // //pi/2 if angle>pi/2->then we can't see it
     // if(angle>1.5708)
     // {
@@ -40,4 +40,17 @@ bool myRT::LightPoint::computeIllumination (const qbVector<double> &intPoint, co
     //     intensity = m_intensity*(1.0-(angle/1.5708));
     //     return true;
     // }
+    intensity = m_intensity*(std::max(0.0, nl));
+    if(nl<0)
+    {
+        color = m_color;
+        return false;
+    }
+    else
+    {
+        
+        color = m_color;
+        return true; 
+    }
+    return true;
 }

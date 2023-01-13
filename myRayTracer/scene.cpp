@@ -11,7 +11,34 @@ myRT::Scene::Scene()
 
     //initialize the objectList
     m_objectList.push_back(std::make_shared<myRT::ObjectShpere>(myRT::ObjectShpere()));
+    m_objectList.push_back(std::make_shared<myRT::ObjectShpere>(myRT::ObjectShpere()));
+    m_objectList.push_back(std::make_shared<myRT::ObjectShpere>(myRT::ObjectShpere()));
 
+
+    //set all transforms
+    //translation-rotation-scale
+    myRT::GTform testMatrix1, testMatrix2, testMatrix3;
+    testMatrix1.SetTransform(	qbVector<double>{std::vector<double>{-1.5, 0.0, 0.0}},
+					qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+					qbVector<double>{std::vector<double>{0.5, 0.5, 0.75}});
+														
+	testMatrix2.SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+					qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+					qbVector<double>{std::vector<double>{0.75, 0.5, 0.5}});
+														
+	testMatrix3.SetTransform(	qbVector<double>{std::vector<double>{1.5, 0.0, 0.0}},
+					qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+					qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}});
+    m_objectList.at(0) -> SetTransformMatirx(testMatrix1);
+	m_objectList.at(1) -> SetTransformMatirx(testMatrix2);
+	m_objectList.at(2) -> SetTransformMatirx(testMatrix3);
+
+    //set colors of objects
+    m_objectList.at(0) -> m_baseColor = qbVector<double>{std::vector<double>{64.0, 128.0, 200.0}};
+	m_objectList.at(1) -> m_baseColor = qbVector<double>{std::vector<double>{255.0, 128.0, 0.0}};
+	m_objectList.at(2) -> m_baseColor = qbVector<double>{std::vector<double>{255.0, 200.0, 0.0}};
+
+    //initialize the light
     m_lightList.push_back(std::make_shared<myRT::LightPoint>(myRT::LightPoint()));
     m_lightList.at(0)->m_location = qbVector<double> {std::vector<double>{5.0, -10.0, -5.0}};
     m_lightList.at(0)->m_color = qbVector<double> {std::vector<double>{255.0, 255.0, 255.0}};
@@ -55,6 +82,11 @@ bool myRT::Scene::Render(Image &image)
                         qbVector<double> colorLight {3};
                         for(auto currentLight: m_lightList)
                         {
+                            //(a.input 
+                            //local Normal(world coord)
+                            //intPoint (world coord); objectList, currentObject
+                            //(b. output
+                            //colorLight, intensity
                             validIllum = currentLight->computeIllumination(intPoint, localNormal, m_objectList, currentObject, colorLight, intensity);
                         }
 
@@ -62,21 +94,32 @@ bool myRT::Scene::Render(Image &image)
                         double dist = (intPoint - cameraRay.m_PointStart).norm();
                         //update distance(max min, kinda of dp)
                         if (dist > maxDist)
-                        maxDist = dist;
+                            maxDist = dist;
                     
                         if (dist < minDist)
-                        minDist = dist;
+                            minDist = dist;
+                        
+                        if(validIllum)
+                        {
+                            image.SetPixel(i, j,	localColor.GetElement(0) * intensity,
+										localColor.GetElement(1) * intensity,
+										localColor.GetElement(2) * intensity);
+                        }
+                        else
+                        {
+
+                        }
                         //set the color of shpere
                         //image.SetPixel(i, j, 255.0, 0.0, 0.0);
                         //image.SetPixel(i, j, 255.0 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0);
 
-                        //3. set color of the image
-                        image.SetPixel(i, j, 255.0*intensity, 0.0, 0.0);
+                        // //3. set color of the image
+                        // image.SetPixel(i, j, 255.0*intensity, 0.0, 0.0);
                     }
                     else
                     {
                         //set black
-                        image.SetPixel(i, j, 0.0, 0.0, 0.0);
+                        //image.SetPixel(i, j, 0.0, 0.0, 0.0);
                     }
                 }
             }

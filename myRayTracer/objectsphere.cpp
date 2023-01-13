@@ -11,13 +11,16 @@ myRT::ObjectShpere::~ObjectShpere()
 }
 
 //Very Important!!!!!!
-bool myRT::ObjectShpere::TestIntersections(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double>)
+//return intersection point (world coord)
+//and localNormal(world coord)
+bool myRT::ObjectShpere::TestIntersections(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)
 {
+    myRT::Ray bkwRay = m_transformationMatrix.Apply(castRay, myRT::BWDGTORM);
     //input: castRay
     //output: intersect or not and a bunch of 
 
     //get unit dir of castRay
-    qbVector<double> vhat = castRay.m_Ray;
+    qbVector<double> vhat = bkwRay.m_Ray;
     vhat.Normalize();
 
     //refer formular
@@ -28,12 +31,14 @@ bool myRT::ObjectShpere::TestIntersections(const Ray &castRay, qbVector<double> 
     //b^2-4*a*c>0
     //double a = 1;
 
-    double b = 2.0*qbVector<double>::dot(castRay.m_PointStart, vhat);
+    double b = 2.0*qbVector<double>::dot(bkwRay.m_PointStart, vhat);
 
-    double c = qbVector<double>::dot(castRay.m_PointStart, castRay.m_PointStart) -1.0;
+    double c = qbVector<double>::dot(bkwRay.m_PointStart, bkwRay.m_PointStart) -1.0;
 
     double intTest = (b*b) - 4.0*c;
 
+    
+    qbVector<double> poi;
     if(intTest>0.0)
     {
         double numSQRT = sqrtf(intTest);
@@ -50,14 +55,27 @@ bool myRT::ObjectShpere::TestIntersections(const Ray &castRay, qbVector<double> 
             //  X=P+t*vhat 
 			if (t1 < t2)
 			{
-				intPoint = castRay.m_PointStart + (vhat * t1);
+                //point of intersection
+				poi = bkwRay.m_PointStart + (vhat * t1);
 			}
 			else
 			{
-				intPoint = castRay.m_PointStart + (vhat * t2);
+				poi = bkwRay.m_PointStart + (vhat * t2);
 			}
-            localNormal = intPoint;
+
+
+
+            //transform back to the original world
+            // Transform the intersection point back into world coordinates.
+			intPoint = m_transformationMatrix.Apply(poi, myRT::FWDGTORM);
+			
+			// objOrigin is the orgin point of local coord and we transform it into the world coord
+			qbVector<double> objOrigin = qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}};
+			qbVector<double> newObjOrigin = m_transformationMatrix.Apply(objOrigin, myRT::FWDGTORM);
+            localNormal = intPoint-newObjOrigin;
 			localNormal.Normalize();
+
+            localColor = m_baseColor;
         }
         
         return true;
