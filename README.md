@@ -1,7 +1,7 @@
 # zixunToyRayTracer
 my toyRayTracer
 
-In this project I followed awsome resources from [Quantitve Bytes](https://www.example.com/my%20great%20page)  
+In this project I followed awsome resources from [Quantitve Bytes](https://www.youtube.com/@QuantitativeBytes)  
 and do everthing from scratch after watching it(not copying/ pasting, but write in my own way).
 I plan to add some new algorithms after finishing the basic framework of this;
 
