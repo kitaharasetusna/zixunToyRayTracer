@@ -19,6 +19,13 @@ change the intensity into the phong model in [1] <br>
 <img width="717" alt="46ea9966145a5c05d41466262db2f2a" src="https://user-images.githubusercontent.com/116760304/212210644-e3316746-80ec-4bb3-b7e0-adea3b63c4b4.png">
 
 
+# milestone 2: <br>
+1. add transformation
+2. transformation from local coord to wolrd coord
+3. add some sphere
+<img width="856" alt="image" src="https://user-images.githubusercontent.com/116760304/212377648-873471d2-fc08-49f9-9305-48c905cec082.png">
+
+
 
 ## reference
 [1] Real-Time Rendering, Fourth Edition 4th Edition
