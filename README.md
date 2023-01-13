@@ -16,4 +16,6 @@ sphere geometry intersection test and basic light(phong with only diffusion ligh
 
 ## reference
 [1] Real-Time Rendering, Fourth Edition 4th Edition
-by Eric Haines  (Author), Naty Hoffman (Author), Tomas Akenine-Mo¨ller (Author)
+by Eric Haines  (Author), Naty Hoffman (Author), Tomas Akenine-Mo¨ller (Author) \b
+[2] Fundamentals of Computer Graphics 4th Edition
+by Steve Marschner (Author), Peter Shirley (Author)
