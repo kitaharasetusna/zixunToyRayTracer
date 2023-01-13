@@ -2,6 +2,7 @@
 #define LIGHTBASE_H
 
 #include <memory>
+#include<algorithm>
 #include "./qbLinAlg/qbVector.h"
 #include "ray.hpp"
 #include "objectBase.hpp"
