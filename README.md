@@ -14,7 +14,9 @@ If one want use this project, they should simply use make command , and make cle
 3. multiple lights (interface&&shared_ptr_list) <br>
 4. sphere geometry intersection test and basic light(Lambertian Shading Model) <br>
 5. Improvements over the [Quantitve Bytes](https://www.youtube.com/@QuantitativeBytes) :<br>
-change the intensity into the phong model in [1] <br>
+change the intensity into the Lambertian Shading model in [1] <br>
+<img width="696" alt="image" src="https://user-images.githubusercontent.com/116760304/212446133-f4232fb9-fd3a-42ae-b296-b22878560a47.png">
+pic1 from [1]
 <img width="717" alt="46ea9966145a5c05d41466262db2f2a" src="https://user-images.githubusercontent.com/116760304/212210644-e3316746-80ec-4bb3-b7e0-adea3b63c4b4.png">
 
 
