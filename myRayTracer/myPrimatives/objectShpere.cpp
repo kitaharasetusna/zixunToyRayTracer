@@ -1,4 +1,4 @@
-#include "objectshpere.hpp"
+#include "objectShpere.hpp"
 
 myRT::ObjectShpere::ObjectShpere()
 {

@@ -15,7 +15,10 @@ CFLAGS = -std=c++17 -Ofast
 # need changings every time we make changes on cpp files(add)
 objects = main.o \
 		  app.o \
-		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/*.cpp))
+		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/*.cpp)) \
+		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/myPrimatives/*.cpp)) \
+		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/myLights/*.cpp)) \
+		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/mymyMaterials/*.cpp)) 
 
 # define rebuildables: easier for clean and rebuild
 rebuildables = $(objects) $(linkTarget)

@@ -5,10 +5,10 @@
 #include<vector>
 
 #include "image.hpp"
-#include "objectshpere.hpp"
+#include "./myPrimatives/objectShpere.hpp"
 #include "camera.hpp"
-#include "lightPoint.hpp"
-#include "objectPlane.hpp"
+#include "./myLights/lightPoint.hpp"
+#include "./myPrimatives/objectPlane.hpp"
 
 namespace myRT
 {

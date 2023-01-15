@@ -3,9 +3,9 @@
 
 #include <memory>
 #include<algorithm>
-#include "./qbLinAlg/qbVector.h"
-#include "ray.hpp"
-#include "objectBase.hpp"
+#include "../qbLinAlg/qbVector.h"
+#include "../ray.hpp"
+#include "../myPrimatives/objectBase.hpp"
 
 namespace myRT
 {

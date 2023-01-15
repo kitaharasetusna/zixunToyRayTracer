@@ -1,9 +1,9 @@
 #ifndef OBJECTBASE_H
 #define OBJECTBASE_H
 
-#include "./qbLinAlg/qbVector.h"
-#include "ray.hpp"
-#include "gtform.hpp"
+#include "../qbLinAlg/qbVector.h"
+#include "../ray.hpp"
+#include "../gtform.hpp"
 //one for linear algebra
 //the other for intersecting 
 //for transformations
