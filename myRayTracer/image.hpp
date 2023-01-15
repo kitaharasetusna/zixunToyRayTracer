@@ -15,13 +15,9 @@ class Image
         //set image size
         //set pRender
         void Initialize(const int xSize, const int ySize, SDL_Renderer* renderer);
-        //---------------tool functions
-        //SDL pipelines
-        void InitTexture();
 
-        Uint32 ConvertColor(const double red, const double green, const double blue);
-        //---------------tool functions
         void SetPixel(const int x, const int y, const double red, const double green, const double blue);
+        //---------------tool functions
 
         //for app to use
         void Display();
@@ -29,6 +25,12 @@ class Image
         int GetXSize();
 
         int GetYSize();
+    private:
+        Uint32 ConvertColor(const double red, const double green, const double blue);
+        //---------------tool functions
+        //SDL pipelines
+        void InitTexture();
+        void ComputeMaxValues();
 
     private:
         SDL_Renderer *m_pRenderer;
@@ -40,6 +42,9 @@ class Image
         std::vector<std::vector<double>> m_rChannel;
         std::vector<std::vector<double>> m_gChannel;
         std::vector<std::vector<double>> m_bChannel;
+
+        //store the maximum value
+        double m_maxRed, m_maxGreen, m_maxBlue, m_overallMax;
 };
 
 #endif

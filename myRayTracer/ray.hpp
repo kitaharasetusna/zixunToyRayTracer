@@ -8,7 +8,8 @@ namespace myRT
         public:
         Ray();
         //some functions  TODO: why &?
-        Ray(qbVector<double> &startPoint, qbVector<double> &endPoint);
+        //answer: when using const reference, no new object is created
+        Ray(const qbVector<double> &startPoint, const qbVector<double> &endPoint);
 
         qbVector<double> GetStartP() const;
         qbVector<double> GetEndP()   const;

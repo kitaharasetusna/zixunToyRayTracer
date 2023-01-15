@@ -22,35 +22,50 @@ bool myRT::LightPoint::computeIllumination (const qbVector<double> &intPoint, co
 
     qbVector<double> startPoint = intPoint;
 
-    double nl =qbVector<double>::dot(localNormal, lightDir);
-    //double angle = acos(qbVector<double>::dot(localNormal, lightDir));
 
+    //construct a right from poi to the light
+    myRT::Ray lightRay (startPoint , startPoint + lightDir);
+    qbVector<double> poi		{3};
+	qbVector<double> poiNormal	{3};
+	qbVector<double> poiColor	{3};
+	bool validInt = false;
 
-    
-    // //pi/2 if angle>pi/2->then we can't see it
-    // if(angle>1.5708)
-    // {
-    //     color = m_color;
-    //     intensity = 0.0;
-    //     return false;
-    // }
-    // else
-    // {
-    //     color = m_color;
-    //     intensity = m_intensity*(1.0-(angle/1.5708));
-    //     return true;
-    // }
-    intensity = m_intensity*(std::max(0.0, nl));
-    if(nl<0)
+    for (auto sceneObject : objectList)
+	{
+		if (sceneObject != currentObject)
+		{
+			validInt = sceneObject ->TestIntersections(lightRay, poi, poiNormal, poiColor);
+		}
+		
+		/* If we have an intersection, then there is no point checking further
+			so we can break out of the loop. In other words, this object is
+			blocking light from this light source. */
+		if (validInt)
+			break;
+	}
+    if(!validInt)
     {
-        color = m_color;
-        return false;
+        double nl =qbVector<double>::dot(localNormal, lightDir);
+        intensity = m_intensity*(std::max(0.0, nl));
+        if(nl<0)
+        {
+            color = m_color;
+            return false;
+        }
+        else
+        {
+            color = m_color;
+            return true; 
+        }
     }
     else
     {
-        
         color = m_color;
-        return true; 
+		intensity = 0.0;
+		return false;
     }
+
+
+    
     return true;
 }

@@ -7,7 +7,7 @@ myRT::Ray::Ray()
     m_Ray = m_PointEnd-m_PointStart;
 }
 
-myRT::Ray::Ray(qbVector<double> &startPoint, qbVector<double> &endPoint)
+myRT::Ray::Ray(const qbVector<double> &startPoint, const qbVector<double> &endPoint)
 {
     m_PointStart = startPoint;
     m_PointEnd   =  endPoint;

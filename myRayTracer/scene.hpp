@@ -8,6 +8,7 @@
 #include "objectshpere.hpp"
 #include "camera.hpp"
 #include "lightPoint.hpp"
+#include "objectPlane.hpp"
 
 namespace myRT
 {
