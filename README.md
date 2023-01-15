@@ -26,6 +26,11 @@ pic1 from [1] <br>
 3. add some sphere
 <img width="856" alt="image" src="https://user-images.githubusercontent.com/116760304/212377648-873471d2-fc08-49f9-9305-48c905cec082.png">
 
+# milestone 3: <br>
+1. add a plane
+2. rewrite the scene and intersection
+3. add shadow check in compute illuminations
+<img width="935" alt="image" src="https://user-images.githubusercontent.com/116760304/212521567-f7c6a509-69ae-4e8d-940f-4494fe12f0b9.png">
 
 
 ## reference
