@@ -49,9 +49,23 @@ myRT::Scene::Scene()
 	m_objectList.at(2) -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 0.8, 0.0}};
 
     //initialize the light
-    m_lightList.push_back(std::make_shared<myRT::LightPoint>(myRT::LightPoint()));
-    m_lightList.at(0)->m_location = qbVector<double> {std::vector<double>{5.0, -10.0, -5.0}};
-    m_lightList.at(0)->m_color = qbVector<double> {std::vector<double>{1.0, 1.0, 1.0}};
+
+    // Construct a test light.
+
+    //blue light
+	m_lightList.push_back(std::make_shared<myRT::LightPoint> (myRT::LightPoint()));
+	m_lightList.at(0) -> m_location = qbVector<double> {std::vector<double> {5.0, -10.0, -5.0}};
+	m_lightList.at(0) -> m_color = qbVector<double> {std::vector<double> {0.0, 0.0, 1.0}};
+	
+    //red light
+	m_lightList.push_back(std::make_shared<myRT::LightPoint> (myRT::LightPoint()));
+	m_lightList.at(1) -> m_location = qbVector<double> {std::vector<double> {-5.0, -10.0, -5.0}};
+	m_lightList.at(1) -> m_color = qbVector<double> {std::vector<double> {1.0, 0.0, 0.0}};
+	
+    //green light
+	m_lightList.push_back(std::make_shared<myRT::LightPoint> (myRT::LightPoint()));
+	m_lightList.at(2) -> m_location = qbVector<double> {std::vector<double> {0.0, -10.0, -5.0}};
+	m_lightList.at(2) -> m_color = qbVector<double> {std::vector<double> {1.0, 1.0, 1.0}};
 }
 
 

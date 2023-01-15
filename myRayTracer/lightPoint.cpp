@@ -43,9 +43,10 @@ bool myRT::LightPoint::computeIllumination (const qbVector<double> &intPoint, co
 		if (validInt)
 			break;
 	}
+
     if(!validInt)
     {
-        double nl =qbVector<double>::dot(localNormal, lightDir);
+         double nl =qbVector<double>::dot(localNormal, lightDir);
         intensity = m_intensity*(std::max(0.0, nl));
         if(nl<0)
         {
@@ -54,18 +55,17 @@ bool myRT::LightPoint::computeIllumination (const qbVector<double> &intPoint, co
         }
         else
         {
+            
             color = m_color;
             return true; 
         }
+        return true;
     }
     else
     {
-        color = m_color;
+        // Shadow, so no illumination.
+		color = m_color;
 		intensity = 0.0;
 		return false;
     }
-
-
-    
-    return true;
 }
