@@ -55,7 +55,6 @@ bool myRT::LightPoint::computeIllumination (const qbVector<double> &intPoint, co
         }
         else
         {
-            
             color = m_color;
             return true; 
         }

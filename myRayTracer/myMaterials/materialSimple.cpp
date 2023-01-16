@@ -22,11 +22,16 @@ qbVector<double> myRT::MaterialSimple::ComputeColor(const std::vector<std::share
 	qbVector<double> spcColor	{3};
     difColor = ComputeDiffuseColor(objectList, lightList, curentObject, intPoint, localNormal, m_baseColor);
     // Compute the reflection component.
+	
+	if(m_reflectivity>0.0)
+		refColor = ComputeReflectionColor(objectList, lightList, curentObject, intPoint, localNormal, cameraRay);
+	//recutrsive part
+	matColor = (refColor * m_reflectivity) + (difColor * (1 - m_reflectivity));
 	// Compute the specular component.
 	if (m_shininess > 0.0)
 		spcColor = ComputeSpecular(objectList, lightList, intPoint, localNormal, cameraRay);
 
-    matColor = difColor + spcColor;
+    matColor = matColor + spcColor;
 	return matColor;
 }
 

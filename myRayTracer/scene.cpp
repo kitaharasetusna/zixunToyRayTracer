@@ -6,9 +6,28 @@ myRT::Scene::Scene()
 {
     //a test Material
     auto testMaterial = std::make_shared<myRT::MaterialSimple>(myRT::MaterialSimple());
+    auto testMaterial2 = std::make_shared<myRT::MaterialSimple>(myRT::MaterialSimple());
+    auto testMaterial3 = std::make_shared<myRT::MaterialSimple>(myRT::MaterialSimple());
+    auto floorMaterial = std::make_shared<myRT::MaterialSimple>(myRT::MaterialSimple());
+
+
     testMaterial->m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
     testMaterial->m_reflectivity=0.5;
     testMaterial->m_shininess=10.0;
+
+    
+    testMaterial2 -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 0.5, 0.0}};
+	testMaterial2 -> m_reflectivity = 0.75;
+	testMaterial2 -> m_shininess = 10.0;
+	
+	testMaterial3 -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 0.8, 0.0}};
+	testMaterial3 -> m_reflectivity = 0.25;
+	testMaterial3 -> m_shininess = 10.0;
+	
+	floorMaterial -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}};
+	floorMaterial -> m_reflectivity = 0.5;
+	floorMaterial -> m_shininess = 0.0;
+
 
     m_camera.SetCameraPosition(	qbVector<double>{std::vector<double> {0.0, -10.0, -2.0}} );
 	m_camera.SetLookAtPosition	( qbVector<double>{std::vector<double> {0.0, 0.0, 0.0}} );
@@ -31,6 +50,7 @@ myRT::Scene::Scene()
                             qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
                             qbVector<double>{std::vector<double>{4.0, 4.0, 1.0}});
     m_objectList.at(3) ->SetTransformMatirx(planeMatrix);
+    
 
 
     //set all transforms
@@ -59,8 +79,10 @@ myRT::Scene::Scene()
 
 
     //assign the material
-    m_objectList.at(2)->assignMaterial(testMaterial);
-
+    m_objectList.at(0)->assignMaterial(testMaterial);
+    m_objectList.at(1) -> assignMaterial(testMaterial);
+	m_objectList.at(2) -> assignMaterial(testMaterial2);
+	m_objectList.at(3) -> assignMaterial(floorMaterial);
 
     //initialize the light
 
@@ -95,8 +117,10 @@ bool myRT::Scene::Render(Image &image)
 	double yFact = 1.0 / (static_cast<double>(m_ySize) / 2.0);
 	
     //get gradient color
-    for(int i=0; i<m_xSize; i++)
-        for(int j=0; j<m_ySize; j++)
+    for(int j=0; j<m_ySize; j++)
+    {
+        std::cout << "Processing line " << j << " of " << m_ySize << "." << std::endl;
+        for(int i=0; i<m_xSize; i++)
             {
                 double normX = (static_cast<double>(i) * xFact) - 1.0;
                 double normY = (static_cast<double>(j) * yFact) - 1.0;
@@ -115,6 +139,8 @@ bool myRT::Scene::Render(Image &image)
                 {
                     if(closestObject->m_hasMaterial)
                     {
+                        //set 0 for all different objec
+                        myRT::MaterialBase::m_reflectionRayCount = 0;
                         //if has material, render the material
                         qbVector<double> color = closestObject -> m_pMaterial -> ComputeColor(	m_objectList, m_lightList,closestObject, closestIntPoint, closestLocalNormal, cameraRay);	
 					    image.SetPixel(i, j, color.GetElement(0), color.GetElement(1), color.GetElement(2));
@@ -129,6 +155,7 @@ bool myRT::Scene::Render(Image &image)
                     }
                 }
             }
+    }
     return true;
 }
 
