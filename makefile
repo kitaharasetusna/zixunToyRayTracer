@@ -18,7 +18,7 @@ objects = main.o \
 		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/*.cpp)) \
 		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/myPrimatives/*.cpp)) \
 		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/myLights/*.cpp)) \
-		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/mymyMaterials/*.cpp)) 
+		  $(patsubst %.cpp, %.o, $(wildcard ./myRayTracer/myMaterials/*.cpp)) 
 
 # define rebuildables: easier for clean and rebuild
 rebuildables = $(objects) $(linkTarget)

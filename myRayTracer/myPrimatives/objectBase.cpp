@@ -29,3 +29,11 @@ void myRT::ObjectBase::SetTransformMatirx(const myRT::GTform &transformMatrix)
     m_transformationMatrix = transformMatrix;
 }
 
+bool myRT::ObjectBase::assignMaterial(const std::shared_ptr<myRT::MaterialBase> &objectMaterial)
+{
+    m_pMaterial = objectMaterial;
+    m_hasMaterial = true;
+    return m_hasMaterial;
+}
+
+

@@ -19,6 +19,10 @@ namespace myRT
 
             bool Render(Image &image);
 
+            bool CastRay(myRT::Ray &castRay, std::shared_ptr<myRT::ObjectBase> &closestObject,
+										qbVector<double> &closestIntPoint, qbVector<double> &closestLocalNormal,
+										qbVector<double> &closestLocalColor);
+
         private:
         //some functions to write
             myRT::Camera m_camera;

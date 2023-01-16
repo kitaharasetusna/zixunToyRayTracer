@@ -1,6 +1,7 @@
 #ifndef OBJECTBASE_H
 #define OBJECTBASE_H
 
+#include <memory>
 #include "../qbLinAlg/qbVector.h"
 #include "../ray.hpp"
 #include "../gtform.hpp"
@@ -10,6 +11,8 @@
 
 namespace  myRT
 {
+    //trick here: forward declared material, which will be overide
+    class MaterialBase;
     class ObjectBase
     {
         public:
@@ -30,11 +33,17 @@ namespace  myRT
 
             void SetTransformMatirx(const myRT::GTform &transformMatrix);
 
+            bool assignMaterial(const std::shared_ptr<myRT::MaterialBase> &objectMaterial);
+
         public:
             //color of the object
             qbVector<double> m_baseColor {3};
 
             myRT::GTform m_transformationMatrix;
+
+            std::shared_ptr<myRT::MaterialBase> m_pMaterial;
+
+            bool m_hasMaterial = false;
 
     };
 } // namespace  myRT
