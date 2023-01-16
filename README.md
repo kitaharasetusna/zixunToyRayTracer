@@ -31,8 +31,11 @@ pic1 from [1] <br>
 2. rewrite the scene and intersection
 3. add shadow check in compute illuminations
 4. add 2 more test light(one blue and another red)
+5. add phong  specular highlights model
 <img width="935" alt="image" src="https://user-images.githubusercontent.com/116760304/212521567-f7c6a509-69ae-4e8d-940f-4494fe12f0b9.png">
 <img width="917" alt="image" src="https://user-images.githubusercontent.com/116760304/212576723-1234e8ae-7091-49fa-9c11-ee92facace04.png">
+<img width="835" alt="2831093a5fd8e3803f1c89116a693f3" src="https://user-images.githubusercontent.com/116760304/212584605-8cbc68bf-065a-4154-b2a0-ef6bef8127f6.png">
+
 
 
 ## reference
