@@ -28,6 +28,7 @@ namespace myRT
                                                   const qbVector<double> &baseColor);
         private:
         //TODO:
+            
     };
 } 
 

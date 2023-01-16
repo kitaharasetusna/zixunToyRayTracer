@@ -1,8 +1,15 @@
 #include "scene.hpp"
 #include "./myMaterials/materialBase.hpp"
+#include "./myMaterials/materialSimple.hpp"
 
 myRT::Scene::Scene()
 {
+    //a test Material
+    auto testMaterial = std::make_shared<myRT::MaterialSimple>(myRT::MaterialSimple());
+    testMaterial->m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
+    testMaterial->m_reflectivity=0.5;
+    testMaterial->m_shininess=10.0;
+
     m_camera.SetCameraPosition(	qbVector<double>{std::vector<double> {0.0, -10.0, -2.0}} );
 	m_camera.SetLookAtPosition	( qbVector<double>{std::vector<double> {0.0, 0.0, 0.0}} );
 	m_camera.SetUp			( qbVector<double>{std::vector<double> {0.0, 0.0, 1.0}} );
@@ -48,6 +55,12 @@ myRT::Scene::Scene()
     m_objectList.at(0) -> m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
 	m_objectList.at(1) -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 0.5, 0.0}};
 	m_objectList.at(2) -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 0.8, 0.0}};
+
+
+
+    //assign the material
+    m_objectList.at(2)->assignMaterial(testMaterial);
+
 
     //initialize the light
 
@@ -103,6 +116,8 @@ bool myRT::Scene::Render(Image &image)
                     if(closestObject->m_hasMaterial)
                     {
                         //if has material, render the material
+                        qbVector<double> color = closestObject -> m_pMaterial -> ComputeColor(	m_objectList, m_lightList,closestObject, closestIntPoint, closestLocalNormal, cameraRay);	
+					    image.SetPixel(i, j, color.GetElement(0), color.GetElement(1), color.GetElement(2));
                     }   
                     else
                     {
