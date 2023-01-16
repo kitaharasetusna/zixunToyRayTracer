@@ -32,7 +32,7 @@ pic1 from [1] <br>
 3. add shadow check in compute illuminations
 4. add 2 more test light(one blue and another red)
 <img width="935" alt="image" src="https://user-images.githubusercontent.com/116760304/212521567-f7c6a509-69ae-4e8d-940f-4494fe12f0b9.png">
-<img width="916" alt="image" src="https://user-images.githubusercontent.com/116760304/212522321-64c15493-4c91-4a62-83ad-a157c075a97b.png">
+<img width="917" alt="image" src="https://user-images.githubusercontent.com/116760304/212576723-1234e8ae-7091-49fa-9c11-ee92facace04.png">
 
 
 ## reference
