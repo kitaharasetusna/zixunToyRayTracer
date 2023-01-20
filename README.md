@@ -46,3 +46,5 @@ pic1 from [1] <br>
 by Eric Haines  (Author), Naty Hoffman (Author), Tomas Akenine-Mo¨ller (Author) <br>
 [2] Fundamentals of Computer Graphics 4th Edition
 by Steve Marschner (Author), Peter Shirley (Author) <br>
+[3] (Strongly suggested) Physically Based Rendering, fourth edition: From Theory to Implementation 4th Edition
+by Matt Pharr (Author), Wenzel Jakob (Author), Greg Humphreys (Author) <br>
